@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buka Bersama 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:linear-gradient(to bottom,#F8F3E7,#ffffff);
+color:#3E2F1C;
+text-align:center;
+overflow-x:hidden;
+}
+
+section{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:60px 20px;
+}
+
+.hero{
+  min-height:100vh;
+}
+
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+h1{font-size:22px;margin-bottom:10px;}
+h2{font-size:18px;margin-bottom:10px;}
+p{font-size:14px;}
+
+.card{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(198,167,94,0.25);
+margin-top:15px;
+border:1px solid #E6D5A3;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:14px;
+background:#C6A75E;
+color:white;
+border-radius:30px;
+text-decoration:none;
+margin-top:15px;
+font-size:14px;
+border:none;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#A88734;
+}
+
+.music-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#C6A75E;
+color:white;
+border:none;
+border-radius:50%;
+width:55px;
+height:55px;
+font-size:20px;
+}
+
+/* Envelope */
+#envelopeScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+overflow:hidden;
+}
+
+#envelopeScreen::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url('areamjk.jpeg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+filter: blur(3px);
+transform: scale(1.1);
+z-index:0;
+}
+
+#envelopeScreen h2,
+#envelopeScreen p,
+.envelope{
+position:relative;
+z-index:1;
+color:white;
+}
+
+.envelope{
+width:200px;
+height:120px;
+background:white;
+border-radius:10px;
+position:relative;
+cursor:pointer;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#C6A75E;
+clip-path:polygon(0 0,100% 0,50% 60%);
+transition:1s;
+}
+
+.open .flap{
+transform:rotateX(180deg);
+transform-origin:top;
+}
+
+.hidden{display:none;}
+
+/* Countdown */
+.countdown{
+display:flex;
+justify-content:space-between;
+margin-top:15px;
+}
+
+.countdown div{
+background:#C6A75E;
+color:white;
+padding:10px;
+border-radius:10px;
+width:23%;
+font-size:12px;
+}
+
+/* Gallery */
+.gallery{
+position:relative;
+margin-top:20px;
+}
+
+.gallery img{
+width:100%;
+border-radius:20px;
+display:none;
+}
+
+.gallery img.active{display:block;}
+
+.nav-btn{
+position:absolute;
+top:45%;
+background:#C6A75E;
+color:white;
+border:none;
+width:35px;
+height:35px;
+border-radius:50%;
+}
+
+.prev{left:5px;}
+.next{right:5px;}
+
+footer{
+padding:20px;
+background:#A88734;
+color:white;
+font-size:12px;
+}
+
+.hero{
+position: relative;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url('areamjk.jpeg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+filter: blur(6px);
+transform: scale(1.1);
+z-index:0;
+}
+
+.hero .container{
+position:relative;
+z-index:1;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+display:none;
+}
+
+/* Confetti */
+#confetti-container{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:9999;
+}
+
+.confetti{
+  position:absolute;
+  width:8px;
+  height:14px;
+  background:#C6A75E;
+  opacity:0.8;
+  animation:fall linear forwards;
+}
+
+/* Sparkle Ramadan */
+#sparkle-container{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:9998;
+}
+
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:radial-gradient(circle, #fff 0%, #C6A75E 60%, transparent 80%);
+  animation: sparkleAnim 3s ease-in-out forwards;
+  opacity:0;
+}
+
+@keyframes sparkleAnim{
+  0%{
+    transform: scale(0.3);
+    opacity:0;
+  }
+  50%{
+    transform: scale(1.2);
+    opacity:1;
+  }
+  100%{
+    transform: scale(0.5);
+    opacity:0;
+  }
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh) translateX(0) rotate(0deg);
+    opacity:1;
+  }
+  50%{
+    transform:translateY(50vh) translateX(20px) rotate(360deg);
+  }
+  100%{
+    transform:translateY(110vh) translateX(-20px) rotate(720deg);
+    opacity:0;
+  }
+}
+
+.main-header{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  padding:20px 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  z-index:10;
+}
+
+#envelopeScreen h2{
+  letter-spacing:1px;
+}
+
+.logo-header{
+  width:140px;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+}
+
+.hero{
+  padding-top:120px;
+}
+
+.opening-text{
+  margin:60px auto 40px auto;
+}
+
+.countdown-section{
+  margin-top:30px;
+}
+
+@media (max-width:768px){
+.hero{
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+url('areamjk.jpeg');
+background-size: cover;
+background-position: center;
+}
+}
+
+@media (min-width: 768px){
+
+  section{
+    padding:60px 40px;
+  }
+
+  h1{
+    font-size:36px;
+  }
+
+  h2{
+    font-size:24px;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  /* Gallery besar */
+  .gallery img{
+    height:450px;
+  }
+
+  .nav-btn{
+    width:50px;
+    height:50px;
+    font-size:20px;
+  }
+
+  /* Countdown lebih besar */
+  .countdown div{
+    font-size:16px;
+    padding:15px;
+  }
+
+  /* Card lebih luas */
+  .card{
+    padding:30px;
+  }
+}
+
+@media (max-width:768px){
+  section{
+    padding:40px 20px;
+  }
+
+  .card{
+    margin-top:12px;
+  }
+}
+
+@media (min-width: 768px){
+
+  section{
+    padding:60px 40px;
+  }
+
+  h1{
+    font-size:36px;
+  }
+
+  h2{
+    font-size:24px;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  /* Gallery besar */
+  .gallery img{
+    height:450px;
+  }
+
+  .nav-btn{
+    width:50px;
+    height:50px;
+    font-size:20px;
+  }
+
+  /* Countdown lebih besar */
+  .countdown div{
+    font-size:16px;
+    padding:15px;
+  }
+
+  /* Card lebih luas */
+  .card{
+    padding:30px;
+  }
+}
+
+@media (min-width: 1024px){
+  .hero{
+    min-height:100vh;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- ENVELOPE -->
+<div id="envelopeScreen">
+<h2>Kepada Yth:</h2>
+<h2>Bapak</h2>
+<h2 style="font-weight:700;">Iwan Susandi</h2>
+<p style="font-weight:500;">MRM Mojokerto</p>
+<p style="margin-top:5px;font-size:13px;opacity:0.85;">
+Dengan hormat kami mengundang
+</p>
+<div class="envelope" onclick="openEnvelope()">
+<div class="flap"></div>
+</div>
+<p style="margin-top:10px;font-size:13px;">Klik Amplop</p>
+</div>
+
+<div id="mainContent" class="hidden">
+<header class="main-header">
+  <img src="logo.jpg" class="logo-header">
+</header>
+<section class="hero">
+<div class="container">
+ <div class="opening-text">
+    <h2>🌙 Marhaban Ya Ramadhan 🌙</h2>
+    <p>
+    Dalam rangka menyambut bulan suci Ramadan 1447 H, 
+    PNM Mekaar Area Mojokerto 2 akan menyelenggarakan 
+    acara <strong>Buka Bersama</strong> sebagai bentuk 
+    silaturahmi dan mempererat kebersamaan.
+    </p>
+
+    <p>
+    Besar harapan kami kiranya Bapak berkenan hadir 
+    untuk memberikan kehormatan dan arahan pada acara tersebut.
+    </p>
+  </div>
+
+<div class="countdown">
+<div><span id="days">0</span><br>Hari</div>
+<div><span id="hours">0</span><br>Jam</div>
+<div><span id="minutes">0</span><br>Menit</div>
+<div><span id="seconds">0</span><br>Detik</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<h2>Galeri</h2>
+<div class="gallery">
+<img src="foto4.jpeg" class="active">
+<img src="foto1.jpeg">
+<img src="foto2.jpeg">
+<button class="nav-btn prev" onclick="prev()">‹</button>
+<button class="nav-btn next" onclick="next()">›</button>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<h2>Detail Acara</h2>
+<div class="card">
+<p><b>📅 7 Maret 2026</b></p>
+<p><b>📍 Ayola Sunrise Hotel</b></p>
+<p><b>Pukul 16.00 - selesai</b></p>
+<p>🎁 Souvenir + Doorprize</p>
+<p>🎤 Guest Star: Cece Gapura</p>
+<p>🎙 MC: Budi</p>
+<p>🎶 Hiburan: Orkestra Geol Music</p>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=-7.4711131,112.4434678" target="_blank">
+  Lihat Lokasi
+</a>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<h2>Dresscode 👗🕴️</h2>
+
+<div class="card">
+<p>👩‍🦰 <b>Cewek:</b> Abaya hitam + Hijab hitam polos</p>
+<p>👨 <b>Cowo:</b> Koko hitam + Celana kain (🚫 No jeans)</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<h2>Konfirmasi Kehadiran</h2>
+
+<div class="card">
+  <p>Silakan konfirmasi kehadiran.</p>
+  <button class="btn" onclick="kirimWA()">Konfirmasi Kehadiran</button>
+</div>
+</section>
+
+<!-- <section id="pilihCabang" style="display:none;">
+<div class="container">
+<h2>Pilih Area Cabang</h2>
+
+<select id="cabangSelect" style="width:100%;padding:12px;border-radius:10px;margin-top:15px;">
+<option value="">-- Pilih Area --</option>
+<option value="Bangsal">Bangsal</option>
+<option value="Kutorejo2">Kutorejo 2</option>
+<option value="Kutorejo">Kutorejo</option>
+<option value="Mojosari2">Mojosari 2</option>
+<option value="Mojosari">Mojosari</option>
+<option value="Ngoro2">Ngoro 2</option>
+<option value="Ngoro">Ngoro</option>
+<option value="Trawas">Trawas</option>
+</select>
+
+<button class="btn" onclick="kirimWA()">Konfirmasi Sekarang</button>
+</div>
+</section> -->
+
+<footer>
+© 2026 Buka Bersama PNM Mekaar Area Mojokerto 2
+</footer>
+
+</div>
+
+<audio id="bgMusic" loop>
+<source src="audiobukber.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<div id="confetti-container"></div>
+
+<div id="sparkle-container"></div>
+
+<script>
+// Nama tamu
+const params = new URLSearchParams(window.location.search);
+const guest = params.get('to');
+if(guest){
+document.getElementById("guestName").innerText = guest;
+}
+
+// Envelope
+function openEnvelope(){
+document.querySelector(".envelope").classList.add("open");
+
+setTimeout(()=>{
+launchConfetti();
+launchSparkle();   // ✨ TAMBAHKAN INI
+document.getElementById("envelopeScreen").style.display="none";
+document.getElementById("mainContent").classList.remove("hidden");
+document.getElementById("bgMusic").play();
+},800);
+}
+
+function launchConfetti(){
+  const container = document.getElementById("confetti-container");
+
+  for(let i=0;i<40;i++){
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random()*100 + "vw";
+    confetti.style.animationDuration = (Math.random()*2+3) + "s";
+    confetti.style.background = ["#C6A75E","#ffffff","#f8e7b5"][Math.floor(Math.random()*3)];
+
+    container.appendChild(confetti);
+
+    setTimeout(()=>{ confetti.remove(); },4000);
+  }
+}
+
+function launchSparkle(){
+  const container = document.getElementById("sparkle-container");
+
+  for(let i=0;i<30;i++){
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle");
+
+    sparkle.style.top = Math.random()*100 + "vh";
+    sparkle.style.left = Math.random()*100 + "vw";
+    sparkle.style.animationDuration = (Math.random()*2+3) + "s";
+
+    container.appendChild(sparkle);
+
+    setTimeout(()=>{ sparkle.remove(); },4000);
+  }
+}
+
+// Countdown
+// Countdown ke 7 Maret 2026 pukul 15:00 WIB
+const targetDate = new Date("March 7, 2026 16:00:00 GMT+0700").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) {
+    document.getElementById("days").innerText = "0";
+    document.getElementById("hours").innerText = "0";
+    document.getElementById("minutes").innerText = "0";
+    document.getElementById("seconds").innerText = "0";
+    return;
+  }
+
+  document.getElementById("days").innerText =
+    Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  document.getElementById("hours").innerText =
+    Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+  document.getElementById("minutes").innerText =
+    Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  document.getElementById("seconds").innerText =
+    Math.floor((distance % (1000 * 60)) / 1000);
+
+}, 1000);
+// Gallery
+let index=0;
+const images=document.querySelectorAll(".gallery img");
+
+function showImage(i){
+images.forEach(img=>img.classList.remove("active"));
+images[i].classList.add("active");
+}
+
+function next(){index=(index+1)%images.length;showImage(index);}
+function prev(){index=(index-1+images.length)%images.length;showImage(index);}
+
+// Tiket
+// Daftar 8 nomor panitia (tanpa +)
+let tipeTiket = "";
+
+
+function kirimWA(){
+
+    const nomor = "6285731419356"; // tanpa 0 depan
+
+    const pesan = `Assalamu'alaikum permisi,
+Izin menyampaikan konfirmasi kehadiran pada acara Buka Bersama PNM Mekaar Area Mojokerto 2 tanggal 7 Maret 2026 pukul 16.00 WIB.
+Terima kasih `;
+
+    const url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+
+    window.open(url, "_blank");
+}
+// Music
+const music=document.getElementById("bgMusic");
+function toggleMusic(){
+if(music.paused){music.play();}
+else{music.pause();}
+}
+</script>
+
+</body>
+</html>
